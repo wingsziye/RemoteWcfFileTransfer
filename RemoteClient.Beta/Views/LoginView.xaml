@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="RemoteClient.Beta.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RemoteClient.Beta.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DockPanel MaxHeight="350" MaxWidth="400">
+            <Grid DockPanel.Dock="Bottom">
+                <Grid>
+                    <UniformGrid Margin="10" Height="30">
+                        <Button Content="连接服务器"
+                                Width="200"
+                                HorizontalAlignment="Center"
+                                Command="{Binding ConnectServerCommand}"/>
+                    </UniformGrid>
+                </Grid>
+            </Grid>
+            <Grid DockPanel.Dock="Top">
+                <Grid Height="50">
+                    <TextBlock Margin="3"
+                               VerticalAlignment="Center"
+                               Text="看我登陆"
+                               FontSize="20"
+                               TextAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <Grid DockPanel.Dock="Left">
+
+            </Grid>
+            <Grid>
+                <Grid>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Margin" Value="5,0,5,0"/>
+                                <Setter Property="TextAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="Margin" Value="5,0,5,0"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <UniformGrid Grid.Column="0" Columns="1">
+                        <TextBlock Text="昵称"/>
+                        <TextBlock Text="开放端口"/>
+                        <TextBlock Text="本机IP"/>
+                        <TextBlock Text="在线状态"/>
+                    </UniformGrid>
+                    <UniformGrid Grid.Column="1" Columns="1">
+                        <TextBox Text="{Binding LoginToken.NickName,ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding LoginToken.ServicePort,ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding LoginToken.IPv4StringAddress,ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox SelectedItem="{Binding LoginToken.OnlineState}" 
+                                  ItemsSource="{Binding OnlineStateEnums}"/>
+                        <ComboBox SelectedItem="{Binding SelectedFastClientType}" 
+                                  ItemsSource="{Binding FastClientTypes}"/>
+                        
+                    </UniformGrid>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

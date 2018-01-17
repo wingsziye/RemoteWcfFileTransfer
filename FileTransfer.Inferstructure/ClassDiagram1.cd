@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FileTransfer.Infrastructure.LocalFileWriter">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAACAAAAAAAAAAAAAAAAAAAgAAAAABCAAAAAA=</HashCode>
+      <FileName>LocalFileWriter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_contextDic" />
+      <Field Name="_contextRequestDic" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.LocalFileReader">
+    <Position X="3.75" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>MJAABAAAACBAFAACBAIABEAAAAAEAAAAAAACAAAQAAE=</HashCode>
+      <FileName>LocalFileReader.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_progressHandler" />
+      <Field Name="_proxyAdapter" />
+      <Field Name="_responsedHandler" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_fileStreamDic" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.FileUpdateHandleContext">
+    <Position X="5" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAgAAAAAAABAAAAAA=</HashCode>
+      <FileName>StateMode\FileUpdateHandleContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_state" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.ContextRequest">
+    <Position X="5.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAgACAACAAAAAAEAAAAACAAAAAAAABgAAAAAAEAAA=</HashCode>
+      <FileName>StateMode\ContextRequest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateBase">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateFileExist">
+    <Position X="12.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateFileExist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateFileFirstUpdate">
+    <Position X="7.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateFileFirstUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateFileLengthEqual">
+    <Position X="10" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateFileLengthEqual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateFileLengthOutRange">
+    <Position X="14.5" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateFileLengthOutRange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateFileNormalTransfer">
+    <Position X="17" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateFileNormalTransfer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileTransfer.Infrastructure.StateMode.StateFileReBlockCheck">
+    <Position X="19.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>StateMode\StateFileReBlockCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.IO.FileStream" Collapsed="true">
+    <Position X="0.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="FileTransfer.Infrastructure.Interfaces.IHandleFileSendProgress">
+    <Position X="8" Y="11.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAACCAAAAAAgAAAA=</HashCode>
+      <FileName>Interfaces\IHandleFileSendProgress.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FileTransfer.Infrastructure.Interfaces.IFileSendAdapter">
+    <Position X="8" Y="9.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAI=</HashCode>
+      <FileName>Interfaces\IFileSendAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FileTransfer.Infrastructure.Interfaces.IHandleUpdateResponsed">
+    <Position X="8" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IHandleUpdateResponsed.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

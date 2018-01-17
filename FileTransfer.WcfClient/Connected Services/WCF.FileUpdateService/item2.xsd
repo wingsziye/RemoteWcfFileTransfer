@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="FileTransferRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BlockCount" type="xs:int" />
+      <xs:element minOccurs="0" name="BlockData" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="BlockIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="EachBlockSize" type="xs:int" />
+      <xs:element minOccurs="0" name="FileMd5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileSize" type="xs:long" />
+      <xs:element minOccurs="0" name="FileSuffix" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSendingOver" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastBlockSize" type="xs:int" />
+      <xs:element minOccurs="0" name="RequestId" type="xs:int" />
+      <xs:element minOccurs="0" name="SeekOffset" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileTransferRequest" nillable="true" type="tns:FileTransferRequest" />
+  <xs:complexType name="FileTransferResponsed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrMsg" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileMd5CheckResult" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsError" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSendingOver" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsWait" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RemoteStreamPosition" type="xs:long" />
+      <xs:element minOccurs="0" name="RequestID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileTransferResponsed" nillable="true" type="tns:FileTransferResponsed" />
+  <xs:complexType name="BlockTransferRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BlockIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="BlockMd5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BlockSize" type="xs:int" />
+      <xs:element minOccurs="0" name="SeekOffset" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BlockTransferRequest" nillable="true" type="tns:BlockTransferRequest" />
+  <xs:complexType name="BlockTransferResponsed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsError" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BlockTransferResponsed" nillable="true" type="tns:BlockTransferResponsed" />
+</xs:schema>

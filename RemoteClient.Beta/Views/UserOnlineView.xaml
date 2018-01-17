@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="RemoteClient.Beta.Views.UserOnlineView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RemoteClient.Beta.Views"
+             xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:setting="clr-namespace:RemoteClient.Beta.Settings"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <DockPanel>
+            <Grid DockPanel.Dock="Bottom">
+                <UniformGrid Rows="1">
+                    <Button Content="退出登录(未实现)" Command="{Binding LogoutCommand}"/>
+                    <Button Content="发射！Biubiubiu~" Command="{Binding UserSelectCommand}" CommandParameter="{Binding Path=SelectedItems,ElementName=LvOnlineUsers}"/>
+                </UniformGrid>
+            </Grid>
+            <Grid DockPanel.Dock="Top"></Grid>
+            <Grid DockPanel.Dock="Left"></Grid>
+            <Grid>
+                <DockPanel>
+                    <Grid DockPanel.Dock="Bottom" MaxHeight="200">
+                        <GroupBox Header="文件发送信息">
+                            <ContentControl prism:RegionManager.RegionName="{x:Static setting:CoreRegionNames.ProgressSendingRegion}"/>
+                            
+                        </GroupBox>
+                    </Grid>
+                    <Grid DockPanel.Dock="Top">
+                        <GroupBox Header="登陆信息">
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="昵称: {0} IP：{1} 开放端口：{2} 在线状态：{3}">
+                                        <Binding Path="SelfToken.NickName"/>
+                                        <Binding Path="SelfToken.IPv4StringAddress"/>
+                                        <Binding Path="SelfToken.ServicePort"/>
+                                        <Binding Path="SelfToken.OnlineState"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </GroupBox>
+                    </Grid>
+                    <Grid>
+                        <GroupBox Header="远程在线信息">
+                            <ListView x:Name="LvOnlineUsers" ItemsSource="{Binding OnlineClients}" SelectionMode="Extended">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding UserSelectCommand}" CommandParameter="{Binding Path=SelectedItems, RelativeSource={ RelativeSource AncestorType=ListView}}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="  昵  称  " DisplayMemberBinding="{Binding Path=NickName}" />
+                                        <GridViewColumn Header="IP地址" DisplayMemberBinding="{Binding Path=IPv4StringAddress}" />
+                                        <GridViewColumn Header=" 开放端口 " DisplayMemberBinding="{Binding Path=ServicePort}" />
+                                        <GridViewColumn Header=" 在线状态 " DisplayMemberBinding="{Binding Path=OnlineState}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </GroupBox>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

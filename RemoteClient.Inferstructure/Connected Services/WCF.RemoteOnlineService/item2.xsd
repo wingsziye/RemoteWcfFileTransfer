@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:5567/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" />
+  <xs:import schemaLocation="http://localhost:5567/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="GetOnlineUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="whoIam" nillable="true" type="q1:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOnlineUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="GetOnlineUsersResult" nillable="true" type="q2:ArrayOfClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateWhoIam">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="whoIam" nillable="true" type="q3:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTokenOnlineState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="token" nillable="true" type="q4:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExistGroupName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="whoIam" nillable="true" type="q5:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExistGroupNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetExistGroupNameResult" nillable="true" type="q6:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TryConnectToAnotherClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="target" nillable="true" type="q7:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TryConnectToAnotherClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TryConnectToAnotherClientResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BeginTranslateFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="target" nillable="true" type="q8:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BeginTranslateFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BeginTranslateFileResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="port" type="xs:int" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="request" nillable="true" type="q9:FileTransferRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="UpdateFileDataResult" nillable="true" type="q10:FileTransferResponsed" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileBlockData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="port" type="xs:int" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="request" nillable="true" type="q11:BlockTransferRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileBlockDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="UpdateFileBlockDataResult" nillable="true" type="q12:BlockTransferResponsed" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndTranslateFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="target" nillable="true" type="q13:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndTranslateFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EndTranslateFileResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServerPushUserOnlineStateChanged">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="newUser" nillable="true" type="q14:ClientToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServerPushServiceClosingCall">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServerPushOpenUpdateService">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServerPushCloseUpdateService">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransferFileData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="transferData" nillable="true" type="q15:FileTransferRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransferFileDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="TransferFileDataResult" nillable="true" type="q16:FileTransferResponsed" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransferFileBlockMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="blockMessage" nillable="true" type="q17:BlockTransferRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransferFileBlockMessageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" minOccurs="0" name="TransferFileBlockMessageResult" nillable="true" type="q18:BlockTransferResponsed" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="RemoteClient.Beta.Views.ProgressReceiveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RemoteClient.Beta.Views"
+             xmlns:publicModel="clr-namespace:Remote.Infrastructure.PublicModels;assembly=Remote.Infrastructure"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ProgressMsgTemplate" DataType="publicModel:ProgressMessage">
+                <Border BorderThickness="1">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding Title}"/>
+                        <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="{Binding StateMsg}"/>
+                        <TextBlock DockPanel.Dock="Bottom">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="传输进度: {0}/{1}">
+                                    <Binding Path="ProgressValue"/>
+                                    <Binding Path="MaxValue"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <ProgressBar Minimum="0" 
+                                     Maximum="{Binding MaxValue}"
+                                     MinHeight="25"
+                                     Value="{Binding ProgressValue}"/>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding ProgressCollection}" ItemTemplate="{StaticResource ProgressMsgTemplate}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RemoteOnlineService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IRemoteOnlineService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:5567/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:5567/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:5567/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Remote.Infrastructure.DataContracts" />
+      <xsd:import schemaLocation="http://localhost:5567/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Net" />
+      <xsd:import schemaLocation="http://localhost:5567/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Net.Sockets" />
+      <xsd:import schemaLocation="http://localhost:5567/?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRemoteOnlineService_GetOnlineUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineUsers" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_GetOnlineUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_UpdateWhoIam_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateWhoIam" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_UpdateTokenOnlineState_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTokenOnlineState" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_GetExistGroupName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistGroupName" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_GetExistGroupName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistGroupNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_TryConnectToAnotherClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:TryConnectToAnotherClient" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_TryConnectToAnotherClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TryConnectToAnotherClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_BeginTranslateFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:BeginTranslateFile" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_BeginTranslateFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BeginTranslateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_UpdateFileData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileData" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_UpdateFileData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_UpdateFileBlockData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileBlockData" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_UpdateFileBlockData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileBlockDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_EndTranslateFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndTranslateFile" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_EndTranslateFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndTranslateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_ServerPushUserOnlineStateChanged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ServerPushUserOnlineStateChanged" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_ServerPushServiceClosingCall_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ServerPushServiceClosingCall" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_ServerPushOpenUpdateService_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ServerPushOpenUpdateService" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_ServerPushCloseUpdateService_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ServerPushCloseUpdateService" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_TransferFileData_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TransferFileData" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_TransferFileData_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TransferFileDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_TransferFileBlockMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TransferFileBlockMessage" />
+  </wsdl:message>
+  <wsdl:message name="IRemoteOnlineService_TransferFileBlockMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TransferFileBlockMessageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRemoteOnlineService">
+    <wsdl:operation name="GetOnlineUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/GetOnlineUsers" message="tns:IRemoteOnlineService_GetOnlineUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/GetOnlineUsersResponse" message="tns:IRemoteOnlineService_GetOnlineUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/UpdateWhoIam" message="tns:IRemoteOnlineService_UpdateWhoIam_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTokenOnlineState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/UpdateTokenOnlineState" message="tns:IRemoteOnlineService_UpdateTokenOnlineState_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExistGroupName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/GetExistGroupName" message="tns:IRemoteOnlineService_GetExistGroupName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/GetExistGroupNameResponse" message="tns:IRemoteOnlineService_GetExistGroupName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TryConnectToAnotherClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/TryConnectToAnotherClient" message="tns:IRemoteOnlineService_TryConnectToAnotherClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/TryConnectToAnotherClientResponse" message="tns:IRemoteOnlineService_TryConnectToAnotherClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BeginTranslateFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/BeginTranslateFile" message="tns:IRemoteOnlineService_BeginTranslateFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/BeginTranslateFileResponse" message="tns:IRemoteOnlineService_BeginTranslateFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFileData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/UpdateFileData" message="tns:IRemoteOnlineService_UpdateFileData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/UpdateFileDataResponse" message="tns:IRemoteOnlineService_UpdateFileData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFileBlockData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/UpdateFileBlockData" message="tns:IRemoteOnlineService_UpdateFileBlockData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/UpdateFileBlockDataResponse" message="tns:IRemoteOnlineService_UpdateFileBlockData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndTranslateFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/EndTranslateFile" message="tns:IRemoteOnlineService_EndTranslateFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/EndTranslateFileResponse" message="tns:IRemoteOnlineService_EndTranslateFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushUserOnlineStateChanged">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/ServerPushUserOnlineStateChanged" message="tns:IRemoteOnlineService_ServerPushUserOnlineStateChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushServiceClosingCall">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/ServerPushServiceClosingCall" message="tns:IRemoteOnlineService_ServerPushServiceClosingCall_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushOpenUpdateService">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/ServerPushOpenUpdateService" message="tns:IRemoteOnlineService_ServerPushOpenUpdateService_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushCloseUpdateService">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/ServerPushCloseUpdateService" message="tns:IRemoteOnlineService_ServerPushCloseUpdateService_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferFileData">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/TransferFileData" message="tns:IRemoteOnlineService_TransferFileData_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/TransferFileDataResponse" message="tns:IRemoteOnlineService_TransferFileData_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferFileBlockMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IRemoteOnlineService/TransferFileBlockMessage" message="tns:IRemoteOnlineService_TransferFileBlockMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IRemoteOnlineService/TransferFileBlockMessageResponse" message="tns:IRemoteOnlineService_TransferFileBlockMessage_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IRemoteOnlineService" type="tns:IRemoteOnlineService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IRemoteOnlineService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetOnlineUsers">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/GetOnlineUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWhoIam">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/UpdateWhoIam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTokenOnlineState">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/UpdateTokenOnlineState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetExistGroupName">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/GetExistGroupName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryConnectToAnotherClient">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/TryConnectToAnotherClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BeginTranslateFile">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/BeginTranslateFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFileData">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/UpdateFileData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFileBlockData">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/UpdateFileBlockData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndTranslateFile">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/EndTranslateFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushUserOnlineStateChanged">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/ServerPushUserOnlineStateChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushServiceClosingCall">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/ServerPushServiceClosingCall" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushOpenUpdateService">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/ServerPushOpenUpdateService" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServerPushCloseUpdateService">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/ServerPushCloseUpdateService" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferFileData">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/TransferFileData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferFileBlockMessage">
+      <soap12:operation soapAction="http://tempuri.org/IRemoteOnlineService/TransferFileBlockMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RemoteOnlineService">
+    <wsdl:port name="NetTcpBinding_IRemoteOnlineService" binding="tns:NetTcpBinding_IRemoteOnlineService">
+      <soap12:address location="net.tcp://localhost:5566/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:5566/</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -3,3 +3,18 @@
 ################################################################################
 
 /FileTransfer.Inferstructure/bin/Debug
+/FileTransfer.Inferstructure/obj/Debug
+/FileTransfer.Sample
+/FileTransfer.WcfClient/obj/Debug
+/packages
+/Remote.Infrestrure/bin/Debug
+/Remote.Infrestrure/obj/Debug
+/RemoteClient.Beta/obj/Debug
+/RemoteClient.Inferstructure/obj/Debug
+/TestHostForMetaData/TestHostClient2ServerInterfaces/obj/Debug
+/TestHostForMetaData/TestHostServer2ClientInterfaces/obj/Debug
+/WCFInterfaces/Client2Server.Interfaces/obj/Debug
+/WCFInterfaces/Server2Client.Interfaces/obj/Debug
+/Wpf.Inferstructure/bin/Debug
+/Wpf.Inferstructure/obj/Debug
+/RemoteClient.Beta/bin/Debug

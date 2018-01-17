@@ -1,0 +1,14 @@
+﻿<Window x:Class="RemoteClient.Beta.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RemoteClient.Beta"
+        xmlns:setting="clr-namespace:RemoteClient.Beta.Settings"
+        xmlns:regions="http://prismlibrary.com/"
+        mc:Ignorable="d"
+        Title="Shell" Height="600" Width="800">
+    <Grid>
+        <ContentControl regions:RegionManager.RegionName="{x:Static setting:CoreRegionNames.MainRegion}"/>
+    </Grid>
+</Window>
