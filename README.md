@@ -1,0 +1,2 @@
+# RemoteWcfFileTransfer
+一个使用WCF实现大文件远程传输的服务
