@@ -29,9 +29,7 @@ namespace FileTransfer.Infrastructure.StateMode
             {
                 fs.Close();
                 var path = FileNameTools.GetDownloadedFullPath(request.WorkingPath);
-                Console.WriteLine(path);
-                File.Move(request.WorkingPath, path);
-
+                File.Move(request.WorkingPath, path);//modify filename
                 
                 progress.ProgressValue = progress.MaxValue;
                 progress.StateMsg = "校验成功！";

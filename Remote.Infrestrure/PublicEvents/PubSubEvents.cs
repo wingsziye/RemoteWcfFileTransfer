@@ -8,8 +8,10 @@ namespace Remote.Infrastructure.PublicEvents
     {
         private PubSubEvents()
         {
+#if DEBUG
             Console.WriteLine($"{DateTime.Now}PubsubEvents Singleton Create");
             Console.WriteLine($"Thread id = {Thread.CurrentThread.ManagedThreadId}");
+#endif
             eventPublisher = new EventAggregator();
         }
 

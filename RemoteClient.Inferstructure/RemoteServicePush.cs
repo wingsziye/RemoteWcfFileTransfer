@@ -30,7 +30,10 @@ namespace RemoteClient.Inferstructure
         public void ServerPushUserOnlineStateChanged(ClientToken token)
         {
             UserOnlineStateChanged?.Invoke(token);
+
+#if DEBUG
             Console.WriteLine($"{token.NickName} {token.OnlineState}");
+#endif
         }
 
         public void ServerPushServiceClosingCall()

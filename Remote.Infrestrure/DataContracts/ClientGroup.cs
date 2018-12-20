@@ -92,7 +92,9 @@ namespace Remote.Infrastructure.DataContracts
                 {
                     // TODO: 释放托管状态(托管对象)。
                     Owner = null;
+#if DEBUG
                     Console.WriteLine($"解散组 {this.groupName} 中共有{this.OnlineClients.Count}人");
+#endif
                     foreach (var onlineClient in OnlineClients)
                     {
                         onlineClient.QuitGroup(this.groupName,null);

@@ -12,11 +12,14 @@ A large file transmission service by using WCF
 
 4.支持多文件同时传输 support multifile concurrent transmission
 
+5.写入时，防止同名文件被覆盖 prevent same name file from overwriting
+
 ## **示例工程(sample project)**
 
-![客户端示例 (client sample)](https://github.com/wingsziye/RemoteWcfFileTransfer/tree/master/RemoteClient.Beta) 
+[客户端示例 (client sample)](https://github.com/wingsziye/RemoteWcfFileTransfer/tree/master/RemoteClient.Beta) 
 
-![服务端示例 (server sample)](https://github.com/wingsziye/RemoteWcfFileTransfer/tree/master/TestHostForMetaData/TestHostServer2ClientInterfaces)
+[服务端示例 (server sample)](https://github.com/wingsziye/RemoteWcfFileTransfer/tree/master/TestHostForMetaData/TestHostServer2ClientInterfaces)
+
 
 ## **如何使用文件传输框架(File transfer code samples):**
 

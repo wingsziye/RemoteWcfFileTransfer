@@ -42,7 +42,6 @@ namespace Remote.Infrastructure.Tookies
                 var insertName = nameTrim.Insert(nameTrim.LastIndexOf("."), $"({count})");
                 fullPath = Path.Combine(dir, insertName);
             }
-            Console.WriteLine(nameTrim);
             return fullPath;
         }
     }

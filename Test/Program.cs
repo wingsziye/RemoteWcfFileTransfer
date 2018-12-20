@@ -13,7 +13,7 @@ namespace FileTransfer.Sample
     {
         static void Main(string[] args)
         {
-            string path = @"E:\UnityProjects\VrShoot_180419.7z";
+            string path = @".\zfb.jpg";
             new FileTransferTest().RunFullTest(path);
             Console.ReadLine();
         }

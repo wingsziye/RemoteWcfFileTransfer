@@ -39,6 +39,10 @@ namespace FileTransfer.Infrastructure
             while (usingWait && times < 10)//最多等待10秒
             {
                 usingWait = FileTookit.CheckFileIsNotUsing(path);
+                if (!usingWait)
+                {
+                    break;
+                }
                 Thread.Sleep(1000);
                 times++;
             }
@@ -196,8 +200,8 @@ namespace FileTransfer.Infrastructure
                     {
                         _progressHandler?.OnSending(fileBlockInfo.FileName);
 #if DEBUG
-                        Console.WriteLine($"{progress.ProgressValue}/{progress.MaxValue}");
-                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        Console.Write($"{progress.ProgressValue}/{progress.MaxValue}");
+                        Console.SetCursorPosition(0, Console.CursorTop);
                         ClearCurrentConsoleLine();
 #endif
                     }
