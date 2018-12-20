@@ -20,8 +20,9 @@ namespace FileTransfer.Infrastructure.StateMode
                     request.ProgressDic[r.FileMd5].StateMsg = "校验中";
                     //request.ProgressDic.Remove(r.FileMd5);
                 }
-
-                Console.WriteLine("Normal 文件传输完毕，进入StateFileExist，预备检查文件MD5");
+#if DEBUG
+                Console.WriteLine("Normal file send finished，prepare to check fileMD5");
+#endif
                 context.State = new StateFileExist();//检查文件长度是否相等或超过。PS:可能存在陷入无限死循环的隐患，调试时注意
                 return context.Request(request);
             }

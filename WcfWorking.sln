@@ -31,7 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTransfer.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTransfer.WcfClient", "FileTransfer.WcfClient\FileTransfer.WcfClient.csproj", "{D4FE5753-88D6-40BF-AC99-C8C58E9EED2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTransfer.Sample", "FileTransfer.Sample\FileTransfer.Sample.csproj", "{25DE1CD2-0941-4E40-A889-EA47F433A48B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F7032926-2965-4DE4-BC4A-6D2FFE619ABC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTransfer.Test", "Test\FileTransfer.Test.csproj", "{25DE1CD2-0941-4E40-A889-EA47F433A48B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +98,7 @@ Global
 		{15684C8C-28C9-45EA-AC5F-7A3D580E984C} = {7CAF17D0-87DB-4320-BDE5-F51214BF4CBD}
 		{42C26825-6D06-4EA8-949E-7BB8A4042CE6} = {DB6A619D-2753-40FD-B328-B7FECBA3CD06}
 		{D4FE5753-88D6-40BF-AC99-C8C58E9EED2D} = {DB6A619D-2753-40FD-B328-B7FECBA3CD06}
+		{25DE1CD2-0941-4E40-A889-EA47F433A48B} = {F7032926-2965-4DE4-BC4A-6D2FFE619ABC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA4838AB-3833-4F5F-B2F8-884E44275532}

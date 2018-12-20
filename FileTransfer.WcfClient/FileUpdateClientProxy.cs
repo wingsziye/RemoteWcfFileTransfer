@@ -11,7 +11,7 @@ using Remote.Infrastructure.DataContracts;
 
 namespace FileTransfer.WcfClient
 {
-    public class FileUpdateClientProxy : ClientBase<IFileUpdateService>,IFileUpdateService,IFileSendAdapter
+    public class FileUpdateClientProxy : ClientBase<IFileUpdateService>,IFileUpdateService,IFileSender
     {
         public FileUpdateClientProxy() : base() { }
 

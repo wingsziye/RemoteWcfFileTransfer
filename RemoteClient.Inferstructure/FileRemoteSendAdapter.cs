@@ -8,7 +8,7 @@ using Remote.Infrastructure.DataContracts;
 
 namespace RemoteClient.Inferstructure
 {
-    public class FileRemoteSendAdapter : IFileSendAdapter
+    public class FileRemoteSendAdapter : IFileSender
     {
         private RemoteOnlineClientProxy _proxy;
         private int _targetPort;

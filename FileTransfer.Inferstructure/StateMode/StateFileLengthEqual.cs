@@ -14,7 +14,7 @@ namespace FileTransfer.Infrastructure.StateMode
         {
             var r = request.FileRequest;
             
-            Console.WriteLine("StateFileLengthEqual");
+            //Console.WriteLine("StateFileLengthEqual");
             var fs = request.WorkingStream;
             string md5 = Md5.GetMd5WithFileStream(fs, fs.Position);
             var progress = request.ProgressDic[r.FileMd5];

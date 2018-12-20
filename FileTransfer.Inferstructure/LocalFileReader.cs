@@ -11,10 +11,10 @@ namespace FileTransfer.Infrastructure
 {
     public class LocalFileReader : IDisposable
     {
-        public LocalFileReader(IFileSendAdapter proxyAdapter, IHandleUpdateResponsed responsedHandler,
-            IHandleFileSendProgress progressHandler) : this()
+        public LocalFileReader(IFileSender sendAdapter, IHandleUpdateResponsed responsedHandler=null,
+            IHandleFileSendProgress progressHandler=null) : this()
         {
-            this._proxyAdapter = proxyAdapter;
+            this._sendAdapter = sendAdapter;
             this._responsedHandler = responsedHandler;
             this._progressHandler = progressHandler;
         }
@@ -24,13 +24,16 @@ namespace FileTransfer.Infrastructure
             _fileStreamDic = new Dictionary<string, FileStream>();
         }
 
-        private IFileSendAdapter _proxyAdapter;
+        private IFileSender _sendAdapter;
         private IHandleUpdateResponsed _responsedHandler;
         private IHandleFileSendProgress _progressHandler;
         private Dictionary<string, FileStream> _fileStreamDic;
 
         public void FileWait(string path)
         {
+#if DEBUG
+            Console.WriteLine("Waiting file release");
+#endif
             bool usingWait = true;
             int times = 0;
             while (usingWait && times < 10)//最多等待10秒
@@ -75,7 +78,7 @@ namespace FileTransfer.Infrastructure
             return info;
         }
 
-        private FileBlockInfo ClacFileBlockInfo(string path, int blockSize = 8192)
+        protected FileBlockInfo ClacFileBlockInfo(string path, int blockSize = 8192)
         {
             var fs = _fileStreamDic[path];
             return ClacFileBlockInfo(path, fs, blockSize);
@@ -115,39 +118,40 @@ namespace FileTransfer.Infrastructure
         /// <param name="blockSize"></param>
         public void RunFileTransfer(string path, int blockSize = 8192)
         {
-            BeginReadFile(path);
+            //prepare
+            PrepareReadFile(path);
             var fileBlockInfo = ClacFileBlockInfo(path, blockSize);
             var request = GenerateTransferRequest(fileBlockInfo);
+#if DEBUG
+            Console.WriteLine("Preparing send file");
+#endif
+            //check progress handler
+            ProgressMessage progress = _progressHandler?.ProgressMessageDic.ContainsKey(path)==true ? _progressHandler?.ProgressMessageDic[path] : new ProgressMessage();
 
-            ProgressMessage progress = null;
-            if (_progressHandler?.ProgressMessageDic.ContainsKey(path)==true)
-            {
-                progress = _progressHandler?.ProgressMessageDic[path];
-            }
-            else
-            {
-                progress = new ProgressMessage();
-            }
-
-            NormalSendFile(path, progress, fileBlockInfo, request);
+            //send
+            OnSendFile(path, progress, fileBlockInfo, request);
 
             //远程检查MD5
             request.IsSendingOver = true;
-            var checkResponsed = _proxyAdapter.UpdateFileData(request);
+            var checkResponsed = _sendAdapter.UpdateFileData(request);
 
-            //判断是否需要重发文件
+            //判断是否需要重发文件 check if need resend
             var result = ReSendFile(path, fileBlockInfo, request, checkResponsed);
 
             if (progress != null)
             {
                 progress.StateMsg = result ? "校验成功！" : "校验失败！";
                 _progressHandler?.OnSendEnd(fileBlockInfo.FileName, result);
+#if DEBUG
+                Console.WriteLine($"{progress.StateMsg}");
+#endif
             }
 
-            EndReadFile(path);
+            //finish send
+            FinishReadFile(path);
         }
 
-        public void NormalSendFile(string path,FileStream fs, ProgressMessage progress, FileBlockInfo fileBlockInfo, FileTransferRequest request)
+        private void OnSendFile(string path,FileStream fs, ProgressMessage progress, FileBlockInfo fileBlockInfo, FileTransferRequest request)
         {
             fs.Position = 0;
             long positionOffset = 0;
@@ -156,10 +160,13 @@ namespace FileTransfer.Infrastructure
             {
                 progress.Title = fileBlockInfo.FileName;
                 progress.MaxValue = fileBlockInfo.BlockCount;
-                progress.StateMsg = "连接准备完毕，开始传输";
+                progress.StateMsg = "Prepare OK";
                 try
                 {
                     _progressHandler?.OnSendStart(fileBlockInfo.FileName, progress);
+#if DEBUG
+                    Console.WriteLine(progress.StateMsg);
+#endif
                 }
                 catch
                 {
@@ -175,7 +182,7 @@ namespace FileTransfer.Infrastructure
                 var buffer = ReadFileBytes(path, fs.Position, sendBlockSize);
                 request.BlockData = buffer;
 
-                var responsed = _proxyAdapter.UpdateFileData(request);
+                var responsed = _sendAdapter.UpdateFileData(request);
                 _responsedHandler?.HandleResponsed(responsed);//等待外部对回应进行处理
                 positionOffset = responsed.RemoteStreamPosition;
 
@@ -188,6 +195,11 @@ namespace FileTransfer.Infrastructure
                     try
                     {
                         _progressHandler?.OnSending(fileBlockInfo.FileName);
+#if DEBUG
+                        Console.WriteLine($"{progress.ProgressValue}/{progress.MaxValue}");
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        ClearCurrentConsoleLine();
+#endif
                     }
                     catch
                     {
@@ -197,14 +209,31 @@ namespace FileTransfer.Infrastructure
             }
         }
 
-        private void NormalSendFile(string path, ProgressMessage progress, FileBlockInfo fileBlockInfo, FileTransferRequest request)
+#if DEBUG
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
+        }
+#endif
+
+        /// <summary>
+        /// 传输文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="progress"></param>
+        /// <param name="fileBlockInfo"></param>
+        /// <param name="request"></param>
+        private void OnSendFile(string path, ProgressMessage progress, FileBlockInfo fileBlockInfo, FileTransferRequest request)
         {
             var fs = _fileStreamDic[path];
-            NormalSendFile(path, fs, progress, fileBlockInfo, request);
+            OnSendFile(path, fs, progress, fileBlockInfo, request);
         }
 
         /// <summary>
-        /// 根据反馈，重发文件
+        /// 根据反馈结果，重发文件
         /// </summary>
         /// <param name="path"></param>
         /// <param name="fs"></param>
@@ -216,6 +245,9 @@ namespace FileTransfer.Infrastructure
             int resendCountOut = 0;
             while (!checkResponsed.FileMd5CheckResult && resendCountOut < 3)//最多重发三次
             {
+#if DEBUG
+                Console.WriteLine("ReSending File, count "+ resendCountOut);
+#endif
                 //MD5检查失败重发
                 var blockMsgList = ClacFileEachBlockMd5(fileBlockInfo, fs);
 
@@ -227,7 +259,7 @@ namespace FileTransfer.Infrastructure
                 request.IsSendingOver = false;
                 for (int i = 0; i < blockMsgList.Count; i++)
                 {
-                    var blockCheck = _proxyAdapter.UpdateFileBlockMessage(blockMsgList[i]);
+                    var blockCheck = _sendAdapter.UpdateFileBlockMessage(blockMsgList[i]);
                     if (blockCheck.IsError)
                     {
                         if (i == blockMsgList.Count - 1)
@@ -237,11 +269,11 @@ namespace FileTransfer.Infrastructure
                         request.BlockIndex = i;
                         request.SeekOffset = i * fileBlockInfo.BlockSize;
                         request.BlockData = ReadFileBytes(path, request.SeekOffset, size);
-                        _proxyAdapter.UpdateFileData(request);
+                        _sendAdapter.UpdateFileData(request);
                     }
                 }
                 request.IsSendingOver = true;
-                checkResponsed = _proxyAdapter.UpdateFileData(request);
+                checkResponsed = _sendAdapter.UpdateFileData(request);
                 resendCountOut++;
             }
             return checkResponsed.FileMd5CheckResult;
@@ -259,6 +291,12 @@ namespace FileTransfer.Infrastructure
             return ReSendFile(path, _fileStreamDic[path], fileBlockInfo, request, checkResponsed);
         }
 
+        /// <summary>
+        /// 计算每个文件块的MD5值
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="fs"></param>
+        /// <returns></returns>
         private List<BlockTransferRequest> ClacFileEachBlockMd5(FileBlockInfo info, FileStream fs)
         {
             var position = fs.Position;
@@ -291,7 +329,15 @@ namespace FileTransfer.Infrastructure
             return list;
         }
 
-
+        /// <summary>
+        /// 检查是否处于断点续传状态
+        /// </summary>
+        /// <param name="responsed"></param>
+        /// <param name="request"></param>
+        /// <param name="info"></param>
+        /// <param name="fsPosition"></param>
+        /// <param name="positionOffset"></param>
+        /// <param name="sendBlockSize"></param>
         private void OfflineReSendCheck(FileTransferResponsed responsed, FileTransferRequest request, FileBlockInfo info, long fsPosition, ref long positionOffset, ref int sendBlockSize)
         {
             if (responsed.RemoteStreamPosition == fsPosition)
@@ -313,6 +359,13 @@ namespace FileTransfer.Infrastructure
             }
         }
 
+        /// <summary>
+        /// 计算文件块索引
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="remotePosition"></param>
+        /// <param name="realBlockIndex"></param>
+        /// <param name="realFsPosition"></param>
         private void ClacBlockIndex(FileBlockInfo info, long remotePosition, out int realBlockIndex, out long realFsPosition)
         {
             var realIndex = (int)(remotePosition / info.BlockSize);
@@ -334,9 +387,13 @@ namespace FileTransfer.Infrastructure
             }
         }
 
-        public void BeginReadFile(string path)
+        /// <summary>
+        /// 准备读文件
+        /// </summary>
+        /// <param name="path"></param>
+        private void PrepareReadFile(string path)
         {
-            FileWait(path);
+            FileWait(path);//检查文件是否被占用
             _fileStreamDic.Add(path, new FileStream(path, FileMode.Open));
             try
             {
@@ -359,10 +416,17 @@ namespace FileTransfer.Infrastructure
             return buffer;
         }
 
-        public void EndReadFile(string path)
+        /// <summary>
+        /// 结束读文件
+        /// </summary>
+        /// <param name="path">文件路径</param>
+        private void FinishReadFile(string path)
         {
             _fileStreamDic[path].Close();
             _fileStreamDic.Remove(path);
+#if DEBUG
+            Console.WriteLine($"Send {path} finish and Success");
+#endif
         }
 
         public static int GetRandomSeed()

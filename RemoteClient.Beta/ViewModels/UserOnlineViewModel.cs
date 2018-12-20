@@ -226,7 +226,7 @@ namespace RemoteClient.Beta.ViewModels
 
         private void LanFileListTransfer(ClientToken targetToken, string[] filePathList)
         {
-            IFileSendAdapter adapter = FileUpdateClientProxy.CreateTcpProxy(targetToken.GenServiceAddress());
+            IFileSender adapter = FileUpdateClientProxy.CreateTcpProxy(targetToken.GenServiceAddress());
             var easyTransfer = new LocalFileReader(adapter, this, this);
 
             List<Task> taskList = new List<Task>();

@@ -8,7 +8,7 @@ using Remote.Infrastructure.Tookies;
 
 namespace FileTransfer.Infrastructure
 {
-    public class LocalFileWriter : IDisposable
+    public class LocalFileWriter : IFileWriter,IDisposable
     {
         private readonly Dictionary<int, FileWriteHandleContext> _contextDic;
         private readonly Dictionary<int, ContextRequest> _contextRequestDic;

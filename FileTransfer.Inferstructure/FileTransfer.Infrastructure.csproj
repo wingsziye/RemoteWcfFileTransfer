@@ -52,10 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IFileSendAdapter.cs" />
+    <Compile Include="Interfaces\IFileSender.cs" />
     <Compile Include="Interfaces\IHandleFileReceiveProgress.cs" />
     <Compile Include="Interfaces\IHandleFileSendProgress.cs" />
     <Compile Include="Interfaces\IHandleUpdateResponsed.cs" />
+    <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="LocalFileReader.cs" />
     <Compile Include="LocalFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

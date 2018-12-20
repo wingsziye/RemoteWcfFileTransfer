@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileTransfer.Infrastructure;
 
 namespace FileTransfer.Sample
 {
@@ -12,21 +13,23 @@ namespace FileTransfer.Sample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(102/101);
+            string path = @"E:\UnityProjects\VrShoot_180419.7z";
+            new FileTransferTest().RunFullTest(path);
             Console.ReadLine();
         }
     }
 
-    class MyClass
+
+
+    class LocalFileTransferMode
     {
-        public void NormalFileSend()
+        public void NormalFileSend(string path)
         {
-            string path = @"c:\abc.avi";
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
                 while (fs.Position < fs.Length)
                 {
-                    byte[] buffer = new byte[2048];
+                    byte[] buffer = new byte[2048];//base on your application to decide block size
                     fs.Read(buffer, 0, buffer.Length);
                     Send(buffer);
                 }
@@ -35,7 +38,7 @@ namespace FileTransfer.Sample
 
         public void Send(byte[] data)
         {
-            
+            //just pretend the data have send to server
         }
     }
 }
