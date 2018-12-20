@@ -7,7 +7,7 @@ using FileTransfer.Infrastructure;
 using FileTransfer.Infrastructure.Interfaces;
 using Remote.Infrastructure.DataContracts;
 
-namespace FileTransfer.Sample
+namespace FileTransfer.Test
 {
     class FileTransferTest
     {
@@ -21,26 +21,6 @@ namespace FileTransfer.Sample
         public void RunFullTest(string path)
         {
             reader.RunFileTransfer(path);
-        }
-    }
-
-    class LocalFileSender : IFileSender
-    {
-        private IFileWriter writer;
-
-        public LocalFileSender(IFileWriter writer)
-        {
-            this.writer = writer;
-        }
-
-        public FileTransferResponsed UpdateFileData(FileTransferRequest transferData)
-        {
-            return writer.WriteFile(transferData);
-        }
-
-        public BlockTransferResponsed UpdateFileBlockMessage(BlockTransferRequest blockMessage)
-        {
-            return writer.CheckBlockMessage(blockMessage);
         }
     }
 }

@@ -45,7 +45,6 @@ void RunFullTest(string path)
 
 2.传输文件 (file sending)
 ```cs
-using FileTransfer.Infrastructure;
 using FileTransfer.Infrastructure.Interfaces;
 using Remote.Infrastructure.DataContracts;
 
