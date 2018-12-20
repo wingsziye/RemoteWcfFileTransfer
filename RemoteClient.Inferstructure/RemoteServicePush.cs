@@ -19,7 +19,7 @@ namespace RemoteClient.Inferstructure
         public static event Action ServerCallOpenUpdateService;
         public static event Action ServerCallCloseUpdateService;
 
-        private LocalFileWriter _fileWriter;
+        private IFileWriter _fileWriter;
 
         public RemoteServicePush()
         {

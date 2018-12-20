@@ -25,6 +25,76 @@ A large file transmission service by using WCF
 
 1.读取文件 (file reading)
 
+```cs
+using FileTransfer.Infrastructure;
+using FileTransfer.Infrastructure.Interfaces;
+
+LocalFileReader reader;
+
+void Init(IFileSender fileSender)
+{
+    reader = new LocalFileReader(fileSender);
+}
+
+void RunFullTest(string path)
+{    
+    reader.RunFileTransfer(path);
+}
+
+```
+
+2.传输文件 (file sending)
+```cs
+using FileTransfer.Infrastructure;
+using FileTransfer.Infrastructure.Interfaces;
+using Remote.Infrastructure.DataContracts;
+
+class LocalFileSender : IFileSender
+{
+    private IFileWriter writer;
+
+    public LocalFileSender(IFileWriter writer)
+    {
+        this.writer = writer;
+    }
+
+    public FileTransferResponsed UpdateFileData(FileTransferRequest transferData)
+    {
+        return writer.WriteFile(transferData);
+    }
+
+    public BlockTransferResponsed UpdateFileBlockMessage(BlockTransferRequest blockMessage)
+    {
+        return writer.CheckBlockMessage(blockMessage);
+    }
+}
+```
+
+3.写入文件 (file writting)
+```cs
+using FileTransfer.Infrastructure;
+using FileTransfer.Infrastructure.Interfaces;
+using Remote.Infrastructure.DataContracts;
+
+IFileWriter writer = new LocalFileWriter();
+```
+
+4.运行测试 (run test)
+```cs
+using FileTransfer.Infrastructure;
+using FileTransfer.Infrastructure.Interfaces;
+using Remote.Infrastructure.DataContracts;
+
+static void Main(string[] args)
+{
+    string path = @".\testfile.jpg";
+    IFileWriter writer = new LocalFileWriter();
+    var sender = new LocalFileSender(writer);
+    new FileTransferTest(sender).RunFullTest(path);
+    Console.ReadLine();
+}
+```
+
 ## **如何配置WCF(WCF code samples)：**
 1. WCF服务端配置
 

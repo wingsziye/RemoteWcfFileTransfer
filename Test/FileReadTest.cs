@@ -13,9 +13,9 @@ namespace FileTransfer.Sample
     {
         private LocalFileReader reader;
 
-        public FileTransferTest()
+        public FileTransferTest(IFileSender fileSender)
         {
-            reader = new LocalFileReader(new FileSender(new LocalFileWriter()));
+            reader = new LocalFileReader(fileSender);
         }
 
         public void RunFullTest(string path)
@@ -24,11 +24,11 @@ namespace FileTransfer.Sample
         }
     }
 
-    class FileSender : IFileSender
+    class LocalFileSender : IFileSender
     {
         private IFileWriter writer;
 
-        public FileSender(IFileWriter writer)
+        public LocalFileSender(IFileWriter writer)
         {
             this.writer = writer;
         }

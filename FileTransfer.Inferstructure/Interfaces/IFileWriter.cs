@@ -7,7 +7,7 @@ using Remote.Infrastructure.DataContracts;
 
 namespace FileTransfer.Infrastructure.Interfaces
 {
-    public interface IFileWriter
+    public interface IFileWriter:IDisposable
     {
         /// <summary>
         /// 写文件 Write byte data to file

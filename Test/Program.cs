@@ -14,7 +14,8 @@ namespace FileTransfer.Sample
         static void Main(string[] args)
         {
             string path = @".\zfb.jpg";
-            new FileTransferTest().RunFullTest(path);
+            var sender = new LocalFileSender(new LocalFileWriter());
+            new FileTransferTest(sender).RunFullTest(path);
             Console.ReadLine();
         }
     }

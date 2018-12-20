@@ -10,7 +10,7 @@ namespace Client2Server.Interfaces
 {
     public class FileUpdateService : IFileUpdateService, IDisposable, IHandleFileReceiveProgress
     {
-        private readonly LocalFileWriter _fileWriter;
+        private readonly IFileWriter _fileWriter;
 
         public FileUpdateService()
         {
