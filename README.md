@@ -227,37 +227,28 @@ class Program
       </netTcpBinding>
     </bindings>
     <client>
-      <endpoint address="net.tcp://localhost:5566/" binding="netTcpBinding" bindingConfiguration="nonSecurityTestBinding" contract="WCF.RemoteOnlineService.IRemoteOnlineService" name="NetTcpBinding_IRemoteOnlineService" />
+      <endpoint address="net.tcp://localhost:5566/" binding="netTcpBinding" bindingConfiguration="nonSecurityTestBinding" 
+      behaviorConfiguration="includeException" 
+      contract="WCF.RemoteOnlineService.IRemoteOnlineService" name="NetTcpBinding_IRemoteOnlineService" />
     </client>
-    <services>
-      <service behaviorConfiguration="customAuthentication" name="Client2Server.Interfaces.FileUpdateService">
-      </service>
-    </services>
     <behaviors>
-      <serviceBehaviors>
-        <behavior name="customAuthentication">
-          <serviceCredentials>
-            <clientCertificate>
-              <authentication certificateValidationMode="None" />
-            </clientCertificate>
-          </serviceCredentials>
-          <serviceMetadata httpGetEnabled="false" httpsGetEnabled="false" />
-        </behavior>
-        <behavior name="">
+      <serviceBehaviors>        
+        <behavior name="includeException">
           <serviceDebug includeExceptionDetailInFaults="true" />
         </behavior>
-      </serviceBehaviors>
-      <endpointBehaviors>
-        <behavior name="IgoreSvcCertValidation">
-          <clientCredentials>
-            <serviceCertificate>
-              <authentication certificateValidationMode="None" />
-            </serviceCertificate>
-          </clientCredentials>
-        </behavior>
-      </endpointBehaviors>
+      </serviceBehaviors>      
     </behaviors>
   </system.serviceModel>
 </configuration>
 ```
 
+4. 使用客户端Demo (client demo)
+
+![Demo Login](./docs/images/login_page.png)
+
+![Demo Transfer](./docs/images/transshow.gif)
+
+## Dependencies
+
+* [Unity Container](https://github.com/unitycontainer/unity)
+* [Prism](https://github.com/PrismLibrary/Prism)
