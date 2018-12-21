@@ -22,6 +22,9 @@ A large file transmission service by using WCF, it also compatible with other Re
 
 [服务端示例 (server sample)](https://github.com/wingsziye/RemoteWcfFileTransfer/tree/master/TestHostForMetaData/TestHostServer2ClientInterfaces)
 
+## **工作原理(work flow)**
+
+![工作原理 (work flow)](./docs/images/transfertheory.png)
 
 ## **如何使用文件传输框架(File transfer code samples):**
 
