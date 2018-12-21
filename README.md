@@ -1,7 +1,7 @@
 # RemoteWcfFileTransfer ![version](https://img.shields.io/badge/Remote%20WCF%20LargeFileTransfer-v0.1.0-orange.svg) ![build state](https://img.shields.io/badge/build-passing-brightgreen.svg)
 一个使用WCF实现的大文件远程传输的服务
 
-A large file transmission service by using WCF
+A large file transmission service by using WCF, it also compatible with other Request&Responsed mode network communication framework.
 
 ## **功能**
 1.支持断点续传 support breakpoint resume 
@@ -12,7 +12,9 @@ A large file transmission service by using WCF
 
 4.支持多文件同时传输 support multifile concurrent transmission
 
-5.写入时，防止同名文件被覆盖 prevent same name file from overwriting
+5.支持同时向多人传输 support multiclient transmission
+
+6.写入时，防止同名文件被覆盖 prevent same name file from overwriting
 
 ## **示例工程(sample project)**
 
@@ -31,12 +33,12 @@ using FileTransfer.Infrastructure.Interfaces;
 
 LocalFileReader reader;
 
-void Init(IFileSender fileSender)
+public LocalFileReader(IFileSender fileSender)
 {
     reader = new LocalFileReader(fileSender);
 }
 
-void RunFullTest(string path)
+public void RunFullTest(string path)
 {    
     reader.RunFileTransfer(path);
 }
