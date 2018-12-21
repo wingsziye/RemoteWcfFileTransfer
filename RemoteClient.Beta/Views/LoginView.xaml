@@ -57,6 +57,7 @@
                         <TextBlock Text="昵称"/>
                         <TextBlock Text="开放端口"/>
                         <TextBlock Text="本机IP"/>
+                        <TextBlock Text="登陆状态"/>
                         <TextBlock Text="在线状态"/>
                     </UniformGrid>
                     <UniformGrid Grid.Column="1" Columns="1">

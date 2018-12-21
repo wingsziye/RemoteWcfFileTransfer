@@ -16,7 +16,9 @@ namespace FileTransfer.Infrastructure.StateMode
             
             //Console.WriteLine("StateFileLengthEqual");
             var fs = request.WorkingStream;
-            string md5 = Md5.GetMd5WithFileStream(fs, fs.Position);
+            //bug : filestream appeared that has been closed
+
+            string md5 = fs.CanRead ? Md5.GetMd5WithFileStream(fs, fs.Position) : Md5.GetMd5WithFilePath(request.WorkingPath);
             var progress = request.ProgressDic[r.FileMd5];
             FileTransferResponsed responsed = new FileTransferResponsed(request.FileRequest)
             {

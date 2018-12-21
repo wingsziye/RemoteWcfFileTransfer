@@ -179,7 +179,14 @@ namespace Server2Client.Interfaces
             //通知客户端打开文件上传服务
             var pushService = PushServiceDic[client];
             pushService.ServerPushOpenUpdateService();
-            _remoteUpdateSenderAdapterDic.Add(target.ServicePort, new FileSendProxy(pushService));
+
+            //bug : when sending file, add another sending task, will trigger this overflow bug.
+            //maybe fixed
+            if (!_remoteUpdateSenderAdapterDic.ContainsKey(target.ServicePort))
+            {
+                _remoteUpdateSenderAdapterDic.Add(target.ServicePort, new FileSendProxy(pushService));
+            }
+            
 
             Thread.Sleep(300);//等待远程服务开启
             try
@@ -212,9 +219,9 @@ namespace Server2Client.Interfaces
         }
 
         
-        public FileTransferResponsed UpdateFileData(int port, FileTransferRequest request)
+        public FileTransferResponsed UpdateFileData(int taskID, FileTransferRequest request)
         {
-            var sendAdapter = _remoteUpdateSenderAdapterDic[port];
+            var sendAdapter = _remoteUpdateSenderAdapterDic[taskID];
             return sendAdapter.UpdateFileData(request);
         }
 
@@ -223,9 +230,9 @@ namespace Server2Client.Interfaces
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public BlockTransferResponsed UpdateFileBlockData(int port,BlockTransferRequest request)
+        public BlockTransferResponsed UpdateFileBlockData(int taskID,BlockTransferRequest request)
         {
-            var sendAdapter = _remoteUpdateSenderAdapterDic[port];
+            var sendAdapter = _remoteUpdateSenderAdapterDic[taskID];
             return sendAdapter.UpdateFileBlockMessage(request);
         }
 

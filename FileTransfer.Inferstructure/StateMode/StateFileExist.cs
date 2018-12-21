@@ -9,8 +9,8 @@ namespace FileTransfer.Infrastructure.StateMode
         {
             long fsLength;
             FileTransferResponsed responsed;
-            
-            using (request.WorkingStream = File.Open(request.WorkingPath,FileMode.Open,FileAccess.ReadWrite))
+
+            using (request.WorkingStream = File.Open(request.WorkingPath, FileMode.Open, FileAccess.ReadWrite))
             {
                 fsLength = request.WorkingStream.Length;
                 if (fsLength > request.FileRequest.FileSize)
@@ -39,7 +39,7 @@ namespace FileTransfer.Infrastructure.StateMode
                     {
                         request.WorkingStream.Close();//防止正常写入文件时触发文件被占用异常
                         responsed = context.Request(request);
-                    }                    
+                    }
                 }
             }
             return responsed;//保证FileStream被Using释放后才return

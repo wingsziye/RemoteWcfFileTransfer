@@ -39,7 +39,7 @@ namespace FileTransfer.Infrastructure
             while (usingWait && times < 10)//最多等待10秒
             {
                 usingWait = FileTookit.CheckFileIsNotUsing(path);
-                if (!usingWait)
+                if (usingWait)
                 {
                     break;
                 }

@@ -56,7 +56,7 @@ namespace Remote.Infrastructure.Tookies
         /// <summary>
         /// 检查文件是否没被占用
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">文件路径</param>
         /// <returns>true:没被占用.false:正被占用</returns>
         public static bool CheckFileIsNotUsing(string path)
         {

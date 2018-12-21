@@ -40,6 +40,7 @@ namespace Remote.Infrastructure.DataContracts
         private IPAddress _address;
         private int _servicePort;
         private string _nickName;
+        private string _taskID;
 
         public bool IsDisposed { get; set; } = false;
 
@@ -95,6 +96,15 @@ namespace Remote.Infrastructure.DataContracts
             get { return _onlineState; }
             set { _onlineState = value;
                 OnPropertyChanged(nameof(OnlineState));
+            }
+        }
+
+        [DataMember]
+        public string TaskId
+        {
+            get { return _taskID; }
+            set { _taskID = value;
+                OnPropertyChanged(nameof(TaskId));
             }
         }
 

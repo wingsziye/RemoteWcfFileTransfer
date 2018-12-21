@@ -64,11 +64,11 @@ namespace Server2Client.Interfaces
         /// <param name="request"></param>
         /// <returns></returns>
         [OperationContract]
-        FileTransferResponsed UpdateFileData(int port, FileTransferRequest request);
+        FileTransferResponsed UpdateFileData(int taskID, FileTransferRequest request);
 
 
         [OperationContract]
-        BlockTransferResponsed UpdateFileBlockData(int port, BlockTransferRequest request);
+        BlockTransferResponsed UpdateFileBlockData(int taskID, BlockTransferRequest request);
 
         /// <summary>
         /// 结束连接

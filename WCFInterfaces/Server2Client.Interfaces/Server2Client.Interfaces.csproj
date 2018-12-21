@@ -58,13 +58,13 @@
     <Compile Include="FileSendProxy.cs" />
     <Compile Include="IPushServiceCallback.cs" />
     <Compile Include="IRemoteOnlineService.cs" />
-    <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteOnlineService.cs" />
-    <Compile Include="Service1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Remote.Infrestrure\Remote.Infrastructure.csproj">

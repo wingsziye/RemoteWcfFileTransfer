@@ -159,6 +159,7 @@ namespace RemoteClient.Beta.ViewModels
                 //TODO : 1 先Begin，让Service Push Call目标客户端开启文件传输服务
                 //TODO : 2 再直接建立连接进行局域网测试，若测试失败，则使用服务端进行Try测试，若测试均失败，则return 退出传输,最好能报个错误
                 ClientToken targetToken = t as ClientToken;
+                targetToken.TaskId = $"{targetToken.ServicePort}+{Guid.NewGuid()}";
                 var task = new Task(() =>
                 {
                     if (targetToken.OnlineState == OnlineStateEnum.Online)
@@ -234,6 +235,7 @@ namespace RemoteClient.Beta.ViewModels
             {
                 Task t = new Task(() =>
                 {
+                    //bug : appeared throw
                     easyTransfer.RunFileTransfer(path);//这个接口目前只支持局域网
                 });
                 taskList.Add(t);
